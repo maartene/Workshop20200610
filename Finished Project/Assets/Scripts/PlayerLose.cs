@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class PlayerLose : MonoBehaviour
 {
     public float minY = -5f;
+    public AudioClip loseFX;
+
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,7 +22,12 @@ public class PlayerLose : MonoBehaviour
         if (transform.position.y <= minY) {
             Debug.Log("You lose!");
 
-            SceneManager.LoadScene(0);
+            audioSource.PlayOneShot(loseFX);
+            Invoke("ReloadScene", loseFX.length);
         }
+    }
+
+    void ReloadScene() {
+        SceneManager.LoadScene(0);
     }
 }

@@ -10,7 +10,7 @@ public class GibOnCollisionEnter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.tag != "Player" || armed == false)
+        if (collision.transform.tag != "Player" || armed == false)
         {
             return;
         }

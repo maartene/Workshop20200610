@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    public AudioClip jumpFX;
     public float force = 100f;
     public float jumpForce = 1000f;
 
     Rigidbody rb;
+    AudioSource audioSource;
 
     bool canJump = true;
 
@@ -15,6 +17,7 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class PlayerControls : MonoBehaviour
         if (canJump && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(Vector3.up * jumpForce);
+            audioSource.PlayOneShot(jumpFX);
         }
     }
 
